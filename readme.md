@@ -2,7 +2,7 @@
 
 Very simple implementation of default constructors that mimic C#'s object initializers in pure PHP code.
 
-> This main repository use parameter type declarations wich require at least version 7.2.0 of PHP to work properly.
+> This branch does not use parameter type declarations, so unlike the main branch this one requires PHP 5.4+ to work properly.
 
 ## How it works
 
@@ -59,10 +59,11 @@ $ArrayTest = new Foo([
     'Bar' => 'Some Value'
 ]);
 
-$ObjectTest = new Duwang(new class {
-    public $Best = 'Koichi steals!';
-    public $Translation = 'No dignity!';
-});
+$Temp = new stdClass();
+$Temp->Best = 'Koichi steals!';
+$Temp->Translation = 'No dignity!';
+
+$ObjectTest = new Duwang($Temp);
 
 // Using __toString() in both objects to keep things simple.
 echo "$ArrayTest;\n$ObjectTest";

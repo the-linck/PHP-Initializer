@@ -13,8 +13,8 @@ trait ArrayInitializer
      * 
      * @param array $Values Names and values of properties to be set
      */
-    public function __construct(array $Values = []) {
-        foreach ($Values as $Property => $Value) {
+    public function __construct($Values = []) {
+        if (is_array($Values)) foreach ($Values as $Property => $Value) {
             // Avoiding creation of new properties
             if(property_exists($this, $Property)) {
                 $this->{$Property} = $Value;
@@ -37,13 +37,11 @@ trait ObjectInitializer
      * 
      * @param object $Values Another object with *visible* properties to copy here.
      */
-    public function __construct(object $Values = null) {
-        if ($Values != null) { // Comparison sould be faster than calling is_object()
-            foreach ($Values as $Property => $Value) {
-                // Avoiding creation of new properties
-                if(property_exists($this, $Property)) {
-                    $this->{$Property} = $Value;
-                }
+    public function __construct($Values = null) {
+        if (is_object($Values)) foreach ($Values as $Property => $Value) {
+            // Avoiding creation of new properties
+            if(property_exists($this, $Property)) {
+                $this->{$Property} = $Value;
             }
         }
     }
