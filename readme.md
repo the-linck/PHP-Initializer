@@ -6,7 +6,7 @@ Very simple implementation of default constructors that mimic C#'s object initia
 
 ## How it works
 
-This lib provides the constructor-initiazer functionality on two different ways, each using a [Trait](https://www.php.net/manual/en/language.oop5.traits.php) with a self-describing name:
+This lib provide the constructor-initiazer functionality on two different ways, each using a [Trait](https://www.php.net/manual/en/language.oop5.traits.php) with a self-describing name:
 
 * **ArrayInitializer**  
 Receives an array, using each value to set an existing property with same name as value's key
