@@ -46,3 +46,31 @@ trait ObjectInitializer
         }
     }
 }
+
+
+
+/**
+ * Allows to have readonly properties in a class, as long they are not public.
+ */
+trait ReadOnlyProperties {
+    /**
+     * White-list of non-pblic fields allowed to be accessed by __get().
+     * Ignorered when it's empty (null or empty arrray), always checked otherwise.
+     * 
+     * @var array|null
+     */
+    protected static $VisibleFields;
+
+    /**
+     * "Magical" getter to access all non-public properties.
+     * 
+     * @return mixed
+     */
+    public function __get($name) {
+        if (empty($VisibleFields)) {
+            return property_exists($this, $name) ? $this->$name : null;
+        } else {
+            return in_array($name, self::$VisibleFields) ? $this->$name : null;
+        }
+    }
+}

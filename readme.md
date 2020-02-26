@@ -76,3 +76,44 @@ DUWANG is the best manga translation, check it out:
             - Koichi steals!
             - No dignity!
 ```
+
+## Bonus
+
+Now the project also ships a trait to allow read-only properties on classes, wich is very simple to use:
+
+1. Add the tait to your class with *use* statement
+2. Set the read-only fields to *protected* or *private*
+3. Set wich fields wil be accessible (optional)
+
+Here's an exemple of the most basic use:
+
+
+```php
+require "./Initializer.php"; // On same folder again
+
+class DuwangForever
+{
+    protected $Best;
+    protected $Translation;
+
+    use ObjectInitializer;
+    use ReadOnlyProperties;
+}
+
+$Temp = new stdClass();
+$Temp->Best = 'What a beautiful Duwang';
+$Temp->Translation = 'Chew.';
+
+$Test = new DuwangForever($Temp);
+
+echo "{$Test->Best}\n{$Test->Translation}\n";
+```
+
+The code above produces the following output:
+```
+What a beautiful Duwang
+Chew.
+```
+
+You can also set wich fields will be visible on your class using the static **$VisibleFields** array - wich will be used only when set by your class to an array (indxed) of field names.  
+If **self::$VisibleFields** is empty or not set, then all *private* and *protected* fields will be visible - and read-only.
